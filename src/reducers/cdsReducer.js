@@ -2,7 +2,7 @@ import { SELECT_CD } from '../actions/index';
 
 const initialState = {
     selectedCd: '',
-    cdsAvailable: ['1', '2', 'Exercises']
+    cdsAvailable: ['1', '2', 'Exercices']
 };
 
 export default function(state = initialState, action) {

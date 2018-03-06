@@ -6,6 +6,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import PlayCircleOutlineIcon from 'material-ui-icons/PlayCircleOutline';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { selectAudio } from '../actions';
 
 const styles = {
   root: {
@@ -77,12 +78,14 @@ Menu.propTypes = {
 
 function mapStateToProps(state){
   return {
-    cdSelected: state.cds.selectedCd
+    cdSelected: state.cds.selectedCd,
+    audiosAvailable: state.audios.audiosAvailable,
+    audioSelected: state.audios.audioSelected
   };
 };
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ }, dispatch);
+  return bindActionCreators({ selectAudio }, dispatch);
 }
 
 export default connect(mapStateToProps, null)(withStyles(styles)(Menu));
