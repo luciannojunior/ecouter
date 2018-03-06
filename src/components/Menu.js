@@ -4,7 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import PlayCircleOutlineIcon from 'material-ui-icons/PlayCircleOutline';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const styles = {
   root: {
@@ -16,10 +17,10 @@ const styles = {
 };
 
 function Menu(props) {
-  const { classes } = props;
+  const { classes, cdSelected } = props;
   return (
     <div className={classes.root}>
-      <List
+      { cdSelected !== '' ? <div><List
           component="nav"
           subheader={<ListSubheader component="div">Unidade 1</ListSubheader>}
         >
@@ -64,7 +65,8 @@ function Menu(props) {
             </ListItemIcon>
             <ListItemText inset primary="Exercício 3" />
           </ListItem>
-        </List>
+        </List>></div> : null }
+      
     </div>
   );
 }
@@ -73,4 +75,14 @@ Menu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Menu);
+function mapStateToProps(state){
+  return {
+    cdSelected: state.cds.selectedCd
+  };
+};
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ }, dispatch);
+}
+
+export default connect(mapStateToProps, null)(withStyles(styles)(Menu));
