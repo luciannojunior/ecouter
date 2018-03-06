@@ -12,6 +12,11 @@ import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
 import Menu from './Menu';
 import CDSelector from './CDSelector';
+import OuvirScreen from './OuvirScreen';
+import BienvenueScreen from './BienvenueScreen';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+
 // import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const drawerWidth = 240;
@@ -72,6 +77,7 @@ class Base extends React.Component {
     );
 
     return (
+    <Router>  
       <div className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar>
@@ -119,9 +125,11 @@ class Base extends React.Component {
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap>{'Selecione um CD para começar'}</Typography>
+          <Route exact path="/" component={BienvenueScreen} />
+          <Route path="/ecouter/:id" component={OuvirScreen} />
         </main>
       </div>
+      </Router>
     );
   }
 }
