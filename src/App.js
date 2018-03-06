@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Title from './components/Title';
+import Base from './components/Base';
 
 import './App.css';
-import Sidebar from './components/Sidebar';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Title/>
-        <Sidebar/>
+        <Base/>
       </div>
     );
   }

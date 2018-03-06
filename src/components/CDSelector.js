@@ -9,26 +9,27 @@ import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import Grid from 'material-ui/Grid';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectCd } from '../actions';
+
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 300,
-    boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+    marginBottom: '20px'
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
 });
 
-class Sidebar extends React.Component {
-
-  state = {cd: ''};
+class CDSelector extends React.Component {
 
   handleChange = (event) => {
-    this.setState({
-      cd: event.target.value
-    });
+    const cd = event.target.value;
+    this.props.selectCd(cd);
   };
+
   render() {
     const { classes } = this.props;
 
@@ -41,7 +42,7 @@ class Sidebar extends React.Component {
               select
               label="Selecione o CD"
               className={classes.textField}
-              value={this.state.cd}
+              value={this.props.cdSelected}
               onChange={this.handleChange.bind(this)}
               SelectProps={{
                 MenuProps: {
@@ -51,7 +52,7 @@ class Sidebar extends React.Component {
               helperText="Por favor, selecione um CD"
               margin="normal"
               >
-                {['1', '2', 'Exercícios'].map(option => (
+                {this.props.cds.map(option => (
                   <MenuItem key={option} value={option}>
                     {option}
                   </MenuItem>
@@ -59,14 +60,24 @@ class Sidebar extends React.Component {
             </TextField>
           </Grid>
         </div>
-        <Menu/>
       </div>
     );
   }
 }
 
-Sidebar.propTypes = {
+CDSelector.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Sidebar);
+function mapStateToProps(state){
+  return {
+    cds: state.cds.cdsAvailable,
+    cdSelected: state.cds.selectedCd
+  };
+};
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ selectCd }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CDSelector));
