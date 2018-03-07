@@ -15,7 +15,7 @@ function BienvenueScreen(props) {
   const { match: { params: { id }}} = props;
   return (
     <div className={classes.root}>
-      <Typography noWrap>{'Selecione um CD e depois uma faixa para escutar :)'}</Typography>
+      <Typography noWrap>{'Bienvenue! Sélectionnez un CD puis une piste à écouter :)'}</Typography>
     </div>
   );
 }
