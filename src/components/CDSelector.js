@@ -49,7 +49,7 @@ class CDSelector extends React.Component {
                   className: classes.menu,
                 },
               }}
-              helperText="S'il vout plaît, Sélectionnez le CD"
+              helperText="S'il vout plaît, sélectionnez le CD"
               margin="normal"
               >
                 {this.props.cds.map(option => (
