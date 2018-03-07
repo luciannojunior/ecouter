@@ -16,12 +16,13 @@ const styles = {
 function OuvirScreen(props) {
   const { classes, cdSelected, audioSelected } = props;
 
-  const audioUrl = `http://futurama.splab.ufcg.edu.br:8082/${cdSelected}/${audioSelected}`;
-  // import wavFile from '../data/audio/1/2.wav';
+  const audioUrl = `http://futurama.splab.ufcg.edu.br:8082/${cdSelected}/${audioSelected}.mp3`;
+
   return (
     <div className={classes.root}>
+      <Typography>{`CD ${ cdSelected } - Audio ${audioSelected}`}</Typography>
       <ReactAudioPlayer
-        src={'/data/audio/1/2.wav'}
+        src={audioUrl}
         autoPlay
         controls
       />
@@ -36,7 +37,7 @@ OuvirScreen.propTypes = {
 function mapStateToProps(state){
   return {
     cdSelected: state.cds.selectedCd,
-    audioSelected: state.audios.audioSelected
+    audioSelected: state.audios.selectedAudio
   };
 };
 

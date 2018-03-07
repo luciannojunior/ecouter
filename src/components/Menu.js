@@ -36,7 +36,7 @@ class Menu extends React.Component {
       <div className={classes.root}>
         { cdSelected !== '' ? <div><List
             component="nav"
-            subheader={<ListSubheader component="div">Selecione o aúdio</ListSubheader>}
+            subheader={<ListSubheader component="div">Sélectionnez une piste</ListSubheader>}
           >
             {Array.apply(null, Array(end - start + 1)).map((_, i) => {
               const audioId = start + i;
@@ -44,7 +44,7 @@ class Menu extends React.Component {
                       <ListItemIcon>
                         <PlayCircleOutlineIcon />
                       </ListItemIcon>
-                      <ListItemText inset primary={"Aúdio " + audioId}  />
+                      <ListItemText inset primary={"Audio " + audioId}  />
                     </ListItem>
             })}
           </List></div> : null }

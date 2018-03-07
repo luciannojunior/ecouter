@@ -19,7 +19,7 @@ const styles = theme => ({
     marginBottom: '20px'
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit * 2,
   },
 });
 
@@ -40,7 +40,7 @@ class CDSelector extends React.Component {
             <TextField
               id="selecionar-cd"
               select
-              label="Selecione o CD"
+              label="Sélectionnez le CD"
               className={classes.textField}
               value={this.props.cdSelected}
               onChange={this.handleChange.bind(this)}
@@ -49,7 +49,7 @@ class CDSelector extends React.Component {
                   className: classes.menu,
                 },
               }}
-              helperText="Por favor, selecione um CD"
+              helperText="S'il vout plaît, Sélectionnez le CD"
               margin="normal"
               >
                 {this.props.cds.map(option => (
