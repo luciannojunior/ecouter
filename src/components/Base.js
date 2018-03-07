@@ -71,8 +71,7 @@ class Base extends React.Component {
 
     const drawer = (
       <div>
-        {/* <div className={classes.toolbar} /> */}
-        <Menu/>
+        <Route path="/" component={Menu} />
       </div>
     );
 

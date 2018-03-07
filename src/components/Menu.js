@@ -17,59 +17,42 @@ const styles = {
   }
 };
 
-function Menu(props) {
-  const { classes, cdSelected } = props;
-  return (
-    <div className={classes.root}>
-      { cdSelected !== '' ? <div><List
-          component="nav"
-          subheader={<ListSubheader component="div">Unidade 1</ListSubheader>}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 1" />
-          </ListItem>
-          <ListItem button>
-          <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 2" />
-          </ListItem>
-          <ListItem button>
-          <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 3" />
-          </ListItem>
-        </List>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">Unidade 1</ListSubheader>}
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 1" />
-          </ListItem>
-          <ListItem button>
-          <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 2" />
-          </ListItem>
-          <ListItem button>
-          <ListItemIcon>
-              <PlayCircleOutlineIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Exercício 3" />
-          </ListItem>
-        </List>></div> : null }
-      
-    </div>
-  );
+class Menu extends React.Component {
+  clicouAudio(audio) {
+    this.props.selectAudio(audio);
+    this.props.history.push('/ecouter/'+audio);
+  };
+
+  render() {
+
+    const { classes, cdSelected, audiosAvailable} = this.props;
+    if (cdSelected === ''){
+      return null
+    };
+    const [ start, end ] = audiosAvailable;
+    
+
+    return (
+      <div className={classes.root}>
+        { cdSelected !== '' ? <div><List
+            component="nav"
+            subheader={<ListSubheader component="div">Selecione o aúdio</ListSubheader>}
+          >
+            {Array.apply(null, Array(end - start + 1)).map((_, i) => {
+              const audioId = start + i;
+              return <ListItem button onClick={this.clicouAudio.bind(this, audioId)}>
+                      <ListItemIcon>
+                        <PlayCircleOutlineIcon />
+                      </ListItemIcon>
+                      <ListItemText inset primary={"Aúdio " + audioId}  />
+                    </ListItem>
+            })}
+          </List></div> : null }
+        
+      </div>
+    );
+  }
+  
 }
 
 Menu.propTypes = {
@@ -88,4 +71,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ selectAudio }, dispatch);
 }
 
-export default connect(mapStateToProps, null)(withStyles(styles)(Menu));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Menu));
